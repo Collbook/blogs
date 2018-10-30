@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use App\Common;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -152,6 +153,47 @@ class SettingsController extends Controller
             Toastr::error('Current old password not match','Error');
             return redirect()->back();
         }
+    }
+
+
+    function updatelogo(Request $request, $id)
+    {
+        $this->validate($request,[
+            'image' => 'required|image',
+        ]);
+
+        $image = $request->file('image');
+
+        $common = new Common;
+       
+
+        if(isset($image))
+        {
+             $imageName = $image->getClientOriginalName();
+ 
+             if(!Storage::disk('public')->exists('logo'))
+             {
+                 Storage::disk('public')->makeDirectory('logo');
+             }
+             // delete old image for profile
+             if(Storage::disk('public')->exists('logo/'.$common->image))
+             {
+                 Storage::disk('public')->delete('logo/'.$common->image);
+             }
+ 
+             $logo = Image::make($image)->resize(120,60)->stream();
+             Storage::disk('public')->put('logo/'.$imageName,$logo);
+        }
+        else
+        {
+            $imageName = $common->image;
+        }
+
+        $common->image = $imageName;
+        Common::truncate();
+        $common->save();
+        Toastr::success('Logo successfully Updated','Success');
+        return redirect()->back();
     }
     /**
      * Remove the specified resource from storage.

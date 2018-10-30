@@ -191,7 +191,7 @@ class CategoryController extends Controller
         $category->image = $imagename;
         $category->save();
         Toastr::success('Category successfully Updated', 'Success');
-        return redirect()->back();
+        return redirect()->route('admin.category.index');
     }
 
     /**

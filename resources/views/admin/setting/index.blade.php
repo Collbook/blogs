@@ -46,6 +46,12 @@
                             </a>
                         </li>
                         
+                        <li role="presentation" class="">
+                            <a href="#change_logo_with_icon_title" data-toggle="tab" aria-expanded="false">
+                                <i class="material-icons">account_box</i>Update Logo
+                            </a>
+                        </li>
+                        
                     </ul>
 
                     <!-- Tab panes -->
@@ -114,6 +120,22 @@
                                 <button type="submit" class="btn btn-primary m-t-15 waves-effect">Update Password</button>
                             </form>
                         </div>
+
+                        <div role="tabpanel" class="tab-pane fade" id="change_logo_with_icon_title">                            
+                            @include('layouts.backend.partial.message')
+                            <form method="POST" action="{{ route('admin.logo.update',['id'=>Auth::user()->id]) }}" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                    <label for="email_address">Change logo</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="file" value="" name="image" class="form-control" placeholder="Logo your company">
+                                        </div>
+                                    </div>
+                                <button type="submit" class="btn btn-primary m-t-15 waves-effect">Update</button>
+                            </form>
+                        </div>
+
                     </div>
                 </div>
             </div>

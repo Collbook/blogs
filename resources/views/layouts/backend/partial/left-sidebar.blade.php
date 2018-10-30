@@ -10,7 +10,7 @@
             <div class="btn-group user-helper-dropdown">
                 <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                 <ul class="dropdown-menu pull-right">
-                    <li><a target="_blank" href="{{ route('admin.settings.index') }}"><i class="material-icons">person</i>Setting</a></li>
+                    <li><a target="_blank" href="{{ Auth::user()->role_id == 1 ? route('admin.settings.index') : route('author.settings.index')  }}"><i class="material-icons">person</i>Setting</a></li>
                     <li role="separator" class="divider"></li>
                     <li>
                         <a class="dropdown-item" href="{{ route('logout') }}"

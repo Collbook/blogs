@@ -55,6 +55,7 @@ Route::group([ 'as'=>'admin.','prefix' => 'admin','namespace'=>'Admin','middlewa
     Route::get('settings','SettingsController@index')->name('settings.index');
     Route::PUT('settings/profile/{id}','SettingsController@updateprofile')->name('profile.update');
     Route::PUT('settings/password/{id}','SettingsController@updatepassword')->name('password.update');
+    Route::PUT('settings/logo/{id}','SettingsController@updatelogo')->name('logo.update');
 
     Route::resource('post','PostController');
     Route::get('pending/post','PostController@pending')->name('post.pending');
@@ -70,6 +71,7 @@ Route::group([ 'as'=>'admin.','prefix' => 'admin','namespace'=>'Admin','middlewa
     Route::resource('comments','CommentController');
 
     Route::resource('author','AuthorController');
+
 
 });
 
@@ -97,4 +99,13 @@ view()->composer('layouts.frontend.partial.footer', function ($view) {
 
     $categories = \App\Category::all();
     $view->with('categories',$categories);
+});
+
+
+
+// view composer navbar
+view()->composer('layouts.backend.partial.navbar', function ($view) {
+
+    $common = \App\Common::first();
+    $view->with('common',$common);
 });

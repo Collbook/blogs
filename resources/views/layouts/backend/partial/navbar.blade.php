@@ -4,10 +4,10 @@
             <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
             <a href="javascript:void(0);" class="bars"></a>
             <a target="_blank" class="navbar-brand" href="/">
-               
+
             </a>
-            <a href="/">
-                <img src="{{ Storage::disk('public')->url('logo/logo.png') }}" alt="" height="48px">
+            <a target="_blank" href="/">
+                <img src="{{ Storage::disk('public')->url('logo/'.$common->image) }}" alt="" height="48px">
             </a>
             
         </div>
